@@ -1,0 +1,569 @@
+Chat 'ChatTitle(text="Я хочу сделать таку…" with Codex, isCustom=true)' (d768995f-ed93-4c42-a6bd-1dd1990c12d7)
+Context:
+
+Messages: 30
+==============================================================================================================
+
+==== UserMessageImpl #1 ====
+User: 
+Я хочу сделать такую систему:
+
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/PlayerController.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "InputActionValue.h"
+#include "GC_BaseCharacterPlayerController.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class BLACK_HEAVEN_API AGC_BaseCharacterPlayerController : public APlayerController
+{
+	GENERATED_BODY()
+	
+public:
+	virtual void SetPawn(APawn* InPawn) override;	
+	virtual void BeginPlay() override;
+
+protected:
+	
+	virtual void SetupInputComponent() override;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputMappingContext> PlayerMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> MoveAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> LookAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> MantleAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> JumpAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> SprintAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> CrouchAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> ProneAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> SwimForwardAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> SwimRightAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<class UInputAction> SwimUpAction;
+	
+private:
+	void EI_Move(const FInputActionValue& Value);
+	void EI_Look(const FInputActionValue& Value);
+	void EI_Mantle();	
+	void EI_Jump();
+	void EI_Crouch();
+	void EI_SprintStarted();
+	void EI_SprintCompleted();
+	void EI_Prone();
+	
+	void EI_SwimForwardMove(const FInputActionValue& Value);
+	void EI_SwimRightMove(const FInputActionValue& Value);
+	void EI_SwimUpMove(const FInputActionValue& Value);
+	
+	TSoftObjectPtr<class AGC_BaseCharacter> CachedBaseCharacter;
+	
+};
+
+Что мне для этого нужно?
+
+kotlin.Unit
+
+==== AgentMessage #2 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #3 ====
+User: 
+Будь добр
+
+kotlin.Unit
+
+==== AgentMessage #4 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #5 ====
+User: 
+Можешь вообще всё убрать что связанно с Jump, Prone, Swim, абсолютно всё. Я делаю Survival Horror и механика упасть лёжа не нужна, плавание я не планирую, это не приключенческий экшн, а прыжок мне просто не нужен
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void SwimForward(float Value);
+	// void SwimRight(float Value);
+	// void SwimUp(float Value);
+
+
+kotlin.Unit
+
+==== AgentMessage #6 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #7 ====
+User: 
+Можешь определить что от меня хотят?
+[2/3] Compile [x64] BasePlayerController.cpp
+  D:\UE5\UnrealProjects\Black Heaven Phantom\ue5\Black_Heaven_Phantom\Source\Black_Heaven_Phantom\Private\Character\Controller\BasePlayerController.cpp(76,22): error C4458: declaration of 'Character' hides class member
+  	if (ABaseCharacter* Character = CachedBaseCharacter.Get())
+  	                    ^
+  D:\Epic Games\UE_5.7\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h(82,25): note: see declaration of 'AController::Character'
+  	TObjectPtr<ACharacter> Character;
+  	                       ^
+  D:\UE5\UnrealProjects\Black Heaven Phantom\ue5\Black_Heaven_Phantom\Source\Black_Heaven_Phantom\Private\Character\Controller\BasePlayerController.cpp(84,22): error C4458: declaration of 'Character' hides class member
+  	if (ABaseCharacter* Character = CachedBaseCharacter.Get())
+  	                    ^
+  D:\Epic Games\UE_5.7\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h(82,25): note: see declaration of 'AController::Character'
+  	TObjectPtr<ACharacter> Character;
+  	                       ^
+  D:\UE5\UnrealProjects\Black Heaven Phantom\ue5\Black_Heaven_Phantom\Source\Black_Heaven_Phantom\Private\Character\Controller\BasePlayerController.cpp(92,22): error C4458: declaration of 'Character' hides class member
+  	if (ABaseCharacter* Character = CachedBaseCharacter.Get())
+  	                    ^
+  D:\Epic Games\UE_5.7\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h(82,25): note: see declaration of 'AController::Character'
+  	TObjectPtr<ACharacter> Character;
+  	                       ^
+  [3/3] Compile [x64] Module.Black_Heaven_Phantom.gen.cpp
+  Trace written to file C:/Users/Damir/AppData/Local/UnrealBuildTool/Log.uba with size 4.5kb
+  Total time in Unreal Build Accelerator local executor: 1.50 seconds
+  
+  Result: Failed (OtherCompilationError)
+  Total execution time: 3.06 seconds
+Build failed.
+
+kotlin.Unit
+
+==== AgentMessage #8 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #9 ====
+User: 
+Можешь попытаться определить где у меня может быть ошибка и указать на неё? Дело в том что я подключил контроллер к персонажу, настроил гейммоды и тд, всё в общем сделал, но персонаж ни как не реагирует на мои действия, то есть он не ходит, просто стоит на месте, и соответственно камера также не реагирует на движение
+
+kotlin.Unit
+
+==== AgentMessage #10 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #11 ====
+User: 
+Ебать ты гений
+
+kotlin.Unit
+
+==== AgentMessage #12 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #13 ====
+User: 
+Так, а теперь я бы хотел узнать как бы мне замедлить вращение камеры. В блупринтах я просто брал из Action Event float параметр и умножал его 0.5 и подключал к Add Controller Yaw/Pitch Input, я вроде бы всё сделал сейчас правильно, но всё равно скорость камеры как будто не уменьшилась, а я хочу результат как в Survival Horror. Есть какие-то решения? Предложи мне их
+
+kotlin.Unit
+
+==== AgentMessage #14 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #15 ====
+User: 
+Знаешь что это?
+
+Fatal error: [File:D:\build\++UE5\Sync\Engine\Source\Runtime\CoreUObject\Private\Serialization\AsyncLoading2.cpp] [Line: 2739] 
+ObjectSerializationError: /Game/Black_Heaven_Phantom/Blueprints/Player/BP_PlayerController (0x2DB410A764677E0) /Game/Black_Heaven_Phantom/Blueprints/Player/BP_PlayerController (0x2DB410A764677E0) - BP_PlayerController_C /Game/Black_Heaven_Phantom/Blueprints/Player/BP_PlayerController.Default__BP_PlayerController_C: Bad name index 19660800/11.
+
+
+0x00007ff72c4f5cb9 Black_Heaven_Phantom.exe!FExportArchive::HandleBadNameIndex() []
+0x00007ff72c4da1b2 Black_Heaven_Phantom.exe!FExportArchive::operator<<() []
+0x00007ff72c3242e1 Black_Heaven_Phantom.exe!TArrayPrivateFriend::Serialize<TScriptDelegate<FNotThreadSafeNotCheckedDelegateMode>,TSizedDefaultAllocator<32> >() []
+0x00007ff72c32e2b5 Black_Heaven_Phantom.exe!operator<<() []
+0x00007ff72c3543c3 Black_Heaven_Phantom.exe!FMulticastInlineDelegateProperty::SerializeItem() []
+0x00007ff72c175282 Black_Heaven_Phantom.exe!SerializeUnversionedProperties() []
+0x00007ff72c174d9a Black_Heaven_Phantom.exe!UStruct::SerializeTaggedProperties() []
+0x00007ff72c16d4af Black_Heaven_Phantom.exe!UClass::SerializeDefaultObject() []
+0x00007ff73189408a Black_Heaven_Phantom.exe!UBlueprintGeneratedClass::SerializeDefaultObject() []
+0x00007ff72c4ea6a2 Black_Heaven_Phantom.exe!FAsyncPackage2::EventDrivenSerializeExport() []
+0x00007ff72c4ee08f Black_Heaven_Phantom.exe!FAsyncPackage2::Event_ProcessExportBundle() []
+0x00007ff72c4ef289 Black_Heaven_Phantom.exe!FEventLoadNode2::Execute() []
+0x00007ff72c4f05fa Black_Heaven_Phantom.exe!FAsyncLoadEventQueue2::ExecuteSyncLoadEvents() []
+0x00007ff72c50a915 Black_Heaven_Phantom.exe!FAsyncLoadingThread2::Run() []
+0x00007ff72bd08bd8 Black_Heaven_Phantom.exe!FRunnableThreadWin::Run() []
+0x00007ff72bd01aff Black_Heaven_Phantom.exe!FRunnableThreadWin::GuardedRun() []
+0x00007ffa21dae8d7 KERNEL32.DLL!UnknownFunction []
+
+Crash in runnable thread FAsyncLoadingThread
+
+kotlin.Unit
+
+==== AgentMessage #16 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #17 ====
+User: 
+Отлично, я понял в чём было дело, оказывается если не выбрать инпут для Mantle и оставить поле пустым в Controller то тогда указатель будет пустым и пойдёт ошибка, незнаю правильно ли эту ошибку называть утечкой памяти или нет, но суть ясна
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #18 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #19 ====
+User: 
+Отлично, я понял в чём было дело, оказывается если не выбрать инпут для Mantle и оставить поле пустым в Controller то тогда указатель будет пустым и пойдёт ошибка, незнаю правильно ли эту ошибку называть утечкой памяти или нет, но суть ясна
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #20 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #21 ====
+User: 
+Я пока просто реализацию и объявление закоментировал
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #22 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #23 ====
+User: 
+Окей. Давай перейдём к следующей теме
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #24 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #25 ====
+User: 
+Обсудим систему передвижения и анимации, потому что они между собой связаны и я хочу быть во все оружии.
+
+1. Знаешь проект Lyra от Epic Games? Если да, то я хочу такую же систему передвижения как там, только гораздо проще с использованием Thread Safe Animation Blueprint или C++ кода.
+
+2. По факту мне нужно сделать Idle->Start->Cycle->Stop систему, я хочу динамечески управлять ускороением и торможением, а также 8-ми конечное передвижение по 8 направлениям.
+
+3. Нужно свободное управление камерой, я хочу облететь персонажа и посмотреть ему в глаза. Но в случае если персонаж целиться то есть находится в Aiming, то тогда само собой камера уже фиксированая. Orient Rotation To Movement выключен, а Use Controller Desired Rotation включен.
+
+И по моему это всё. Если что-то вспомню я подготовлю. А теперь можешь подготовить сначала мне план реализации?
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #26 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #27 ====
+User: 
+Подтверждение по камере: в FreeLook персонаж должен поворачиваться за камерой или только в Aiming?
+
+Он поворачивается за камерой только в Aiming
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #28 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
+==== UserMessageImpl #29 ====
+User: 
+Важное дополнение к камере будет, я хотел бы чтобы если камера смотрела на лицо персонажа, а игрок нажал кнопку W - идти вперёд, то персонаж развернулся на 180 грудсов и пошёл вперёд
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+// void ABasePlayerController::EI_Mantle()
+// {
+// 	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+// 	{
+// 		ControlledBaseCharacter->Mantle();
+// 	}
+// }
+Attachment Name: Errors in selection
+Attachments Kind: Visible
+Attachments Source: CurrentSelectionRetriever / SelectionProblemsChatAttachment
+Attachments Text:
+
+Class ABasePlayerController has no member 'EI_Mantle' of type void()
+at: ABasePlayerController::EI_Mantle
+on the lines:
+		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
+	}
+}
+
+// void ABasePlayerController::EI_Mantle()
+
+
+
+kotlin.Unit
+
+==== AgentMessage #30 ====
+Assistant: 
+
+
+Tool use list:
+
+
+kotlin.Unit
+
