@@ -23,15 +23,22 @@ public:
 	virtual void LookUp(float Yaw, float Pitch) override;
 	virtual	void Mantle() override;
 	
-	virtual void StartAiming() override;
-	virtual void StopAiming() override;
-	virtual bool IsAiming() const override;
+	// Aiming (Прицеливание)
+	void StartAiming() ;
+	void StopAiming();
+	bool IsAiming() const {return bIsAiming;}
 	
+	// Shooting (Стрельба)
+	void StartShooting();
+	void StopShooting();
+	bool IsShooting() const {return bIsShooting;}
 	// Spawn weapon in character (Спавн оружия у персонажа)
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	ABaseWeapon* EquipWeapon(TSubclassOf<ABaseWeapon> Weapon);
 	
 protected:
+	
+#pragma region BaseComponents
 	// Camera (Камера)
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Chracters| Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
@@ -41,7 +48,16 @@ protected:
 	// SceneComp (Компонент использующийся как оффсет для оружия)
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Chracters| Camera")
 	TObjectPtr<USceneComponent> WeaponSocketHandR;
-
+#pragma endregion
+	
+	// Is Aiming State (Состояние прицеливания)
+	UPROPERTY(BlueprintReadOnly, Category="Shooting")
+	bool bIsAiming = false;
+	
+	// Is Shooting (Состояние стрельбы. Стрельба возможна только из состояния прицеливания)
+	UPROPERTY(BlueprintReadOnly, Category = "Shooting")
+	bool bIsShooting = false;
+	
 #pragma region SpawnWeaponSys
 	
 	// A Class selected in editor (Класс выбираемый в редакторе)

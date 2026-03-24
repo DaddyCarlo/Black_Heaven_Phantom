@@ -83,9 +83,20 @@ void APlayerCharacter::StopAiming()
 	GetCharacterMovement()->MaxWalkSpeed = 300.f;
 }
 
-bool APlayerCharacter::IsAiming() const
+void APlayerCharacter::StartShooting()
 {
-	return bIsAiming;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Shooting"));
+	UE_LOG(LogTemp, Warning, TEXT("Shooting"));
+	
+	// TO DO: Разобраться со стрельбой, изменить способ ввода
+}
+
+void APlayerCharacter::StopShooting()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Stop Shooting"));
+	UE_LOG(LogTemp, Warning, TEXT("Stop Shooting"));
+	
+	// TO DO: Разобраться со стрельбой, изменить способ ввода
 }
 
 ABaseWeapon* APlayerCharacter::EquipWeapon(TSubclassOf<ABaseWeapon> WeaponClass)

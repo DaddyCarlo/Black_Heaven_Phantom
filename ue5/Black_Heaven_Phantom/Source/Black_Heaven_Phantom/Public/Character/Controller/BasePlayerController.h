@@ -37,6 +37,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
 	TObjectPtr<UInputAction> AimingAction;
 	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<UInputAction> ShootingAction ;
+	
 	//UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
 	//TObjectPtr<UInputAction> MantleAction;
 
@@ -48,6 +51,8 @@ private:
 	//void EI_Mantle();
 	void EI_AimStart();
 	void EI_AimStop();
+	void EI_ShootingStart();
+	void EI_ShootingStop();
 
 
 	TWeakObjectPtr<APlayerCharacter> CachedBaseCharacter;

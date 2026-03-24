@@ -23,13 +23,13 @@ public:
 	virtual void Mantle(){};
 	
 	// Aiming
-	virtual void StartAiming(){};
-	virtual void StopAiming(){};
-	virtual bool IsAiming() const {return bIsAiming;}
+
+	
+	// Shooting
+
 protected:
 
-	UPROPERTY(BlueprintReadOnly, Category="Aiming")
-	bool bIsAiming = false;
+
 private:
 
 	

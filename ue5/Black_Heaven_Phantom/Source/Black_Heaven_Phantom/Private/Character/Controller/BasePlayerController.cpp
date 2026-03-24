@@ -55,6 +55,11 @@ void ABasePlayerController::SetupInputComponent()
 		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_AimStart);
 		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Completed, this, &ABasePlayerController::EI_AimStop);
 	}
+	if (ShootingAction)
+	{
+		EnhancedInput->BindAction(ShootingAction, ETriggerEvent::Triggered, this, &ABasePlayerController::EI_ShootingStart);
+		EnhancedInput->BindAction(ShootingAction, ETriggerEvent::Completed, this, &ABasePlayerController::EI_ShootingStop);
+	}
 	// if (MantleAction)
 	// {
 	// 	EnhancedInput->BindAction(MantleAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_Mantle);
@@ -93,6 +98,22 @@ void ABasePlayerController::EI_AimStop()
 	if(APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
 	{
 		ControlledBaseCharacter->StopAiming();
+	}
+}
+
+void ABasePlayerController::EI_ShootingStart()
+{
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	{
+		ControlledBaseCharacter->StartShooting();
+	}
+}
+
+void ABasePlayerController::EI_ShootingStop()
+{
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	{
+		ControlledBaseCharacter->StopShooting();
 	}
 }
 
