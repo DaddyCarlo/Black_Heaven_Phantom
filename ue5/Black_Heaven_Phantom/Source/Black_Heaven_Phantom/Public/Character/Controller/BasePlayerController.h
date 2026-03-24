@@ -24,6 +24,7 @@ public:
 protected:
 	virtual void SetupInputComponent() override;
 
+	// Указатели на Input Action. 
 	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
 	TObjectPtr<UInputMappingContext> PlayerMappingContext;
 
