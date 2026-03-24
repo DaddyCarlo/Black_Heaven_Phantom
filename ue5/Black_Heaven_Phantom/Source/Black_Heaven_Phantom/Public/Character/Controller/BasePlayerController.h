@@ -5,11 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
-#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "BasePlayerController.generated.h"
 
-class ABaseCharacter;
+class APlayerCharacter;
 class UInputAction;
 class UInputMappingContext;
 
@@ -33,15 +32,22 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
 	TObjectPtr<UInputAction> LookAction;
-
+	
+	UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
+	TObjectPtr<UInputAction> AimingAction;
+	
 	//UPROPERTY(EditDefaultsOnly, Category="Enhanced Input")
 	//TObjectPtr<UInputAction> MantleAction;
+
+	
 
 private:
 	void EI_Move(const FInputActionValue& Value);
 	void EI_Look(const FInputActionValue& Value);
 	//void EI_Mantle();
+	void EI_AimStart();
+	void EI_AimStop();
 
 
-	TWeakObjectPtr<ABaseCharacter> CachedBaseCharacter;
+	TWeakObjectPtr<APlayerCharacter> CachedBaseCharacter;
 };

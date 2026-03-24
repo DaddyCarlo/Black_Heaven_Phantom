@@ -1,14 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Character/Controller/BasePlayerController.h"
-
-#include "Character/BaseCharacter.h"
+#include "Character/Player/PlayerCharacter.h"
+#include "EnhancedInputComponent.h" 
 #include "InputAction.h"
 
 void ABasePlayerController::SetPawn(APawn* InPawn)
 {
 	Super::SetPawn(InPawn);
-	CachedBaseCharacter = Cast<ABaseCharacter>(InPawn);
+	CachedBaseCharacter = Cast<APlayerCharacter>(InPawn);
 }
 
 void ABasePlayerController::BeginPlay()
@@ -50,7 +50,11 @@ void ABasePlayerController::SetupInputComponent()
 	{
 		EnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABasePlayerController::EI_Look);
 	}
-
+	if (AimingAction)
+	{
+		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_AimStart);
+		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Completed, this, &ABasePlayerController::EI_AimStop);
+	}
 	// if (MantleAction)
 	// {
 	// 	EnhancedInput->BindAction(MantleAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_Mantle);
@@ -60,7 +64,7 @@ void ABasePlayerController::SetupInputComponent()
 
 void ABasePlayerController::EI_Move(const FInputActionValue& Value)
 {
-	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
 	{
 		FVector2D MovementVector = Value.Get<FVector2D>();
 		ControlledBaseCharacter->Move(MovementVector.X, MovementVector.Y);
@@ -69,12 +73,29 @@ void ABasePlayerController::EI_Move(const FInputActionValue& Value)
 
 void ABasePlayerController::EI_Look(const FInputActionValue& Value)
 {
-	if (ABaseCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
 	{
 		FVector2D LookAxisVector = Value.Get<FVector2D>();
 		ControlledBaseCharacter->LookUp(LookAxisVector.X, LookAxisVector.Y);
 	}
 }
+
+void ABasePlayerController::EI_AimStart()
+{
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	{
+		ControlledBaseCharacter->StartAiming();
+	}
+}
+
+void ABasePlayerController::EI_AimStop()
+{
+	if(APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	{
+		ControlledBaseCharacter->StopAiming();
+	}
+}
+
 
 // void ABasePlayerController::EI_Mantle()
 // {

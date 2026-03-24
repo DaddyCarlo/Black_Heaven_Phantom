@@ -6,6 +6,9 @@
 #include "Character/BaseCharacter.h"
 #include "PlayerCharacter.generated.h"
 
+class UCameraComponent;
+class USpringArmComponent;
+
 /**
  * 
  */
@@ -21,11 +24,16 @@ public:
 	virtual void LookUp(float Yaw, float Pitch) override;
 	virtual	void Mantle() override;
 	
+	virtual void StartAiming() override;
+	virtual void StopAiming() override;
+	virtual bool IsAiming() const override;
 protected:
 	// Camera
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Chracters| Camera")
-	class UCameraComponent* CameraComponent;
+	TObjectPtr<UCameraComponent> CameraComponent;
 	// SpringArm
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Chracters| Camera")
-	class USpringArmComponent* SpringArmComponent;
+	TObjectPtr<USpringArmComponent> SpringArmComponent;
+
+	
 };

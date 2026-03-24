@@ -9,7 +9,7 @@
 APlayerCharacter::APlayerCharacter()
 {
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 	
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -20,8 +20,8 @@ APlayerCharacter::APlayerCharacter()
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	CameraComponent->bUsePawnControlRotation = false;
 	
-	//GetCharacterMovement()->bOrientRotationToMovement = true;
-	//GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 }
 #pragma region Basic Movement
 void APlayerCharacter::Move(float Right, float Forward)
@@ -51,4 +51,23 @@ void APlayerCharacter::LookUp(float Yaw, float Pitch)
 void APlayerCharacter::Mantle()
 {
 	// Placeholder: connect your mantle component/ability here.
+}
+
+void APlayerCharacter::StartAiming()
+{
+	bIsAiming = true;
+	CameraComponent->SetFieldOfView(70.f);
+	GetCharacterMovement()->MaxWalkSpeed = 225.f;
+}
+
+void APlayerCharacter::StopAiming()
+{
+	bIsAiming = false;
+	CameraComponent->SetFieldOfView(90.f);
+	GetCharacterMovement()->MaxWalkSpeed = 300.f;
+}
+
+bool APlayerCharacter::IsAiming() const
+{
+	return bIsAiming;
 }

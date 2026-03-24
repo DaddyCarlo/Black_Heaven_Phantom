@@ -16,12 +16,22 @@ public:
 	ABaseCharacter();
 
 	virtual void BeginPlay() override;
+	
 	virtual void Move(float Right, float Forward) {};
 	virtual void LookUp(float Yaw, float Pitch) {};
 
 	virtual void Mantle(){};
+	
+	// Aiming
+	virtual void StartAiming(){};
+	virtual void StopAiming(){};
+	virtual bool IsAiming() const {return bIsAiming;}
 protected:
 
+	UPROPERTY(BlueprintReadOnly, Category="Aiming")
+	bool bIsAiming = false;
 private:
 
+	
+	
 };
