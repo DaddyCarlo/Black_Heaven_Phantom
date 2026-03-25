@@ -32,9 +32,18 @@ public:
 	void StartShooting();
 	void StopShooting();
 	bool IsShooting() const {return bIsShooting;}
+	
 	// Spawn weapon in character (Спавн оружия у персонажа)
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	ABaseWeapon* EquipWeapon(TSubclassOf<ABaseWeapon> Weapon);
+	
+	// Is Aiming State (Состояние прицеливания)
+	UPROPERTY(BlueprintReadOnly, Category="Shooting")
+	bool bIsAiming = false;
+	
+	// Is Shooting (Состояние стрельбы. Стрельба возможна только из состояния прицеливания)
+	UPROPERTY(BlueprintReadOnly, Category = "Shooting")
+	bool bIsShooting = false;
 	
 protected:
 	
@@ -49,14 +58,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Chracters| Camera")
 	TObjectPtr<USceneComponent> WeaponSocketHandR;
 #pragma endregion
-	
-	// Is Aiming State (Состояние прицеливания)
-	UPROPERTY(BlueprintReadOnly, Category="Shooting")
-	bool bIsAiming = false;
-	
-	// Is Shooting (Состояние стрельбы. Стрельба возможна только из состояния прицеливания)
-	UPROPERTY(BlueprintReadOnly, Category = "Shooting")
-	bool bIsShooting = false;
 	
 #pragma region SpawnWeaponSys
 	

@@ -3,6 +3,7 @@
 #include "Character/Controller/BasePlayerController.h"
 #include "Character/Player/PlayerCharacter.h"
 #include "EnhancedInputComponent.h" 
+#include "HeadMountedDisplayTypes.h"
 #include "InputAction.h"
 
 void ABasePlayerController::SetPawn(APawn* InPawn)
@@ -52,12 +53,12 @@ void ABasePlayerController::SetupInputComponent()
 	}
 	if (AimingAction)
 	{
-		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_AimStart);
+		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Triggered, this, &ABasePlayerController::EI_AimStart);
 		EnhancedInput->BindAction(AimingAction, ETriggerEvent::Completed, this, &ABasePlayerController::EI_AimStop);
 	}
 	if (ShootingAction)
 	{
-		EnhancedInput->BindAction(ShootingAction, ETriggerEvent::Triggered, this, &ABasePlayerController::EI_ShootingStart);
+		EnhancedInput->BindAction(ShootingAction, ETriggerEvent::Started, this, &ABasePlayerController::EI_ShootingStart);
 		EnhancedInput->BindAction(ShootingAction, ETriggerEvent::Completed, this, &ABasePlayerController::EI_ShootingStop);
 	}
 	// if (MantleAction)
@@ -103,7 +104,7 @@ void ABasePlayerController::EI_AimStop()
 
 void ABasePlayerController::EI_ShootingStart()
 {
-	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get())
+	if (APlayerCharacter* ControlledBaseCharacter = CachedBaseCharacter.Get(); ControlledBaseCharacter && ControlledBaseCharacter->bIsAiming && !ControlledBaseCharacter->bIsShooting)
 	{
 		ControlledBaseCharacter->StartShooting();
 	}

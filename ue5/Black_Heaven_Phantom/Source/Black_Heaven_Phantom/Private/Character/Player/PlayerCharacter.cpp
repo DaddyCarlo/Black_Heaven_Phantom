@@ -17,6 +17,7 @@ APlayerCharacter::APlayerCharacter()
 	WeaponSocketHandR = CreateDefaultSubobject<USceneComponent>("WeaponOffset");
 	WeaponSocketHandR->SetupAttachment(GetMesh(), WeaponSocketName);
 	
+	
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	SpringArmComponent->SetupAttachment(RootComponent);
 	SpringArmComponent->bUsePawnControlRotation = true;
@@ -24,7 +25,6 @@ APlayerCharacter::APlayerCharacter()
 	SpringArmComponent->ProbeSize = 20.f;
 	SpringArmComponent->bDoCollisionTest = true;
 	
-	//SpringArmComponent->TargetOffset = FVector(-10.0f, -35.0f, 65.0f);
 	SpringArmComponent->SocketOffset = FVector(0, 35.f, 65.f);
 	
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
@@ -71,6 +71,8 @@ void APlayerCharacter::Mantle()
 
 void APlayerCharacter::StartAiming()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Aim"));
+
 	bIsAiming = true;
 	CameraComponent->SetFieldOfView(60.f);
 	GetCharacterMovement()->MaxWalkSpeed = 225.f;
@@ -78,6 +80,9 @@ void APlayerCharacter::StartAiming()
 
 void APlayerCharacter::StopAiming()
 {
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Aiming End"));
+
 	bIsAiming = false;
 	CameraComponent->SetFieldOfView(75.f);
 	GetCharacterMovement()->MaxWalkSpeed = 300.f;
@@ -85,6 +90,7 @@ void APlayerCharacter::StopAiming()
 
 void APlayerCharacter::StartShooting()
 {
+	bIsShooting = true;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Shooting"));
 	UE_LOG(LogTemp, Warning, TEXT("Shooting"));
 	
@@ -93,6 +99,7 @@ void APlayerCharacter::StartShooting()
 
 void APlayerCharacter::StopShooting()
 {
+	bIsShooting = false;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Stop Shooting"));
 	UE_LOG(LogTemp, Warning, TEXT("Stop Shooting"));
 	
